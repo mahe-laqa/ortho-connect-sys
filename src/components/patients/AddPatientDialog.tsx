@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,7 @@ const patientSchema = z.object({
   email: z.string().email('Invalid email').optional().or(z.literal('')),
   phone: z.string().min(1, 'Phone is required').max(20),
   dateOfBirth: z.string().optional(),
-  gender: z.string().optional(),
+  gender: z.enum(['male', 'female', 'other', '']).optional(),
   address: z.string().optional(),
   emergencyContactName: z.string().optional(),
   emergencyContactPhone: z.string().optional(),
@@ -38,6 +38,14 @@ interface AddPatientDialogProps {
 
 export function AddPatientDialog({ open, onOpenChange, onSuccess }: AddPatientDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [gender, setGender] = useState('');
+
+  // Reset gender when dialog closes
+  useEffect(() => {
+    if (!open) {
+      setGender('');
+    }
+  }, [open]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,7 +57,7 @@ export function AddPatientDialog({ open, onOpenChange, onSuccess }: AddPatientDi
       email: formData.get('email') as string,
       phone: formData.get('phone') as string,
       dateOfBirth: formData.get('dateOfBirth') as string,
-      gender: formData.get('gender') as string,
+      gender: gender || '',
       address: formData.get('address') as string,
       emergencyContactName: formData.get('emergencyContactName') as string,
       emergencyContactPhone: formData.get('emergencyContactPhone') as string,
@@ -81,7 +89,7 @@ export function AddPatientDialog({ open, onOpenChange, onSuccess }: AddPatientDi
         email: data.email || null,
         phone: data.phone,
         date_of_birth: data.dateOfBirth || null,
-        gender: data.gender || null,
+        gender: gender || null,
         address: data.address || null,
         emergency_contact_name: data.emergencyContactName || null,
         emergency_contact_phone: data.emergencyContactPhone || null,
@@ -95,6 +103,7 @@ export function AddPatientDialog({ open, onOpenChange, onSuccess }: AddPatientDi
       onOpenChange(false);
       onSuccess();
       (e.target as HTMLFormElement).reset();
+      setGender('');
     } catch (error: any) {
       toast.error(error.message || 'Failed to add patient');
     } finally {
@@ -142,7 +151,7 @@ export function AddPatientDialog({ open, onOpenChange, onSuccess }: AddPatientDi
             </div>
             <div className="space-y-2">
               <Label htmlFor="gender">Gender</Label>
-              <Select name="gender">
+              <Select value={gender} onValueChange={setGender}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select gender" />
                 </SelectTrigger>

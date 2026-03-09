@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { devError } from '@/lib/logger';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { 

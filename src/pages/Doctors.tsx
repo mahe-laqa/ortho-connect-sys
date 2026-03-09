@@ -46,7 +46,7 @@ export default function Doctors() {
       setFilteredDoctors(data || []);
     } catch (error: any) {
       toast.error('Failed to fetch doctors');
-      console.error('Error:', error);
+      devError('Error:', error);
     } finally {
       setLoading(false);
     }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { devError } from '@/lib/logger';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -45,7 +46,7 @@ export default function Doctors() {
       setFilteredDoctors(data || []);
     } catch (error: any) {
       toast.error('Failed to fetch doctors');
-      console.error('Error:', error);
+      devError('Error:', error);
     } finally {
       setLoading(false);
     }
@@ -84,7 +85,7 @@ export default function Doctors() {
       fetchDoctors();
     } catch (error: any) {
       toast.error('Failed to delete doctor');
-      console.error('Error:', error);
+      devError('Error:', error);
     }
   };
 

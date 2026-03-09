@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { devError } from '@/lib/logger';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -35,7 +36,7 @@ export default function Patients() {
       setFilteredPatients(data || []);
     } catch (error: any) {
       toast.error('Failed to fetch patients');
-      console.error('Error:', error);
+      devError('Error:', error);
     } finally {
       setLoading(false);
     }

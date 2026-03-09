@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { devError } from '@/lib/logger';
 import {
   Dialog,
   DialogContent,
@@ -54,7 +55,7 @@ export function AddAppointmentDialog({ open, onOpenChange, onSuccess }: AddAppoi
       if (error) throw error;
       setPatients(data || []);
     } catch (error: any) {
-      console.error('Error fetching patients:', error);
+      devError('Error fetching patients:', error);
       toast.error('Failed to load patients');
     }
   };
@@ -74,7 +75,7 @@ export function AddAppointmentDialog({ open, onOpenChange, onSuccess }: AddAppoi
       if (error) throw error;
       setDoctors(data || []);
     } catch (error: any) {
-      console.error('Error fetching doctors:', error);
+      devError('Error fetching doctors:', error);
       toast.error('Failed to load doctors');
     }
   };

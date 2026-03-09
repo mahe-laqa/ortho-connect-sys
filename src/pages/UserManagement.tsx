@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { devError } from '@/lib/logger';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -93,7 +94,7 @@ export default function UserManagement() {
         setUsers(combinedUsers);
       }
     } catch (error: any) {
-      console.error('Error fetching users:', error);
+      devError('Error fetching users:', error);
       toast.error('Failed to load users');
     } finally {
       setLoading(false);
@@ -124,7 +125,7 @@ export default function UserManagement() {
       toast.success('User role updated successfully');
       fetchUsers();
     } catch (error: any) {
-      console.error('Error updating role:', error);
+      devError('Error updating role:', error);
       toast.error('Failed to update user role');
     } finally {
       setUpdating(null);

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { devError } from '@/lib/logger';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -49,7 +50,7 @@ export default function Dashboard() {
         activeAppointments: activeCount || 0,
       });
     } catch (error) {
-      console.error('Error fetching stats:', error);
+      devError('Error fetching stats:', error);
     }
   };
 

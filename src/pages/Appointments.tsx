@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { devError } from '@/lib/logger';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -35,7 +36,7 @@ export default function Appointments() {
       setAppointments(data || []);
     } catch (error: any) {
       toast.error('Failed to fetch appointments');
-      console.error('Error:', error);
+      devError('Error:', error);
     } finally {
       setLoading(false);
     }
@@ -57,7 +58,7 @@ export default function Appointments() {
       fetchAppointments();
     } catch (error: any) {
       toast.error('Failed to delete appointment');
-      console.error('Error:', error);
+      devError('Error:', error);
     }
   };
 

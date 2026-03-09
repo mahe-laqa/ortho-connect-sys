@@ -36,7 +36,7 @@ export default function Appointments() {
       setAppointments(data || []);
     } catch (error: any) {
       toast.error('Failed to fetch appointments');
-      console.error('Error:', error);
+      devError('Error:', error);
     } finally {
       setLoading(false);
     }

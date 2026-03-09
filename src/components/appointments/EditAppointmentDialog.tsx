@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { devError } from '@/lib/logger';
 import {
   Dialog,
   DialogContent,

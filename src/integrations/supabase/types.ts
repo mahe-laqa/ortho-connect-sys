@@ -220,10 +220,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      generate_patient_id: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
+      generate_patient_id: { Args: never; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

@@ -58,11 +58,11 @@ export default function UserManagement() {
 
       if (rolesError) throw rolesError;
 
-      // Get auth users (admin only can do this via RLS)
-      const { data: { users: authUsers }, error: authError } = await supabase.auth.admin.listUsers();
+      // Fetch auth users via secure edge function
+      const { data: listData, error: listError } = await supabase.functions.invoke('list-users');
 
-      if (authError) {
-        // Fallback: use profiles if admin.listUsers fails
+      if (listError || !listData?.users) {
+        // Fallback: use profiles only if edge function fails
         const combinedUsers = profiles.map((profile) => {
           const userRole = roles.find((r) => r.user_id === profile.id);
           return {
@@ -76,7 +76,7 @@ export default function UserManagement() {
         });
         setUsers(combinedUsers);
       } else {
-        // Combine all data
+        const authUsers = listData.users as { id: string; email: string; created_at: string }[];
         const combinedUsers = authUsers.map((authUser) => {
           const profile = profiles.find((p) => p.id === authUser.id);
           const userRole = roles.find((r) => r.user_id === authUser.id);

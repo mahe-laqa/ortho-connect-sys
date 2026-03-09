@@ -94,7 +94,7 @@ export default function UserManagement() {
         setUsers(combinedUsers);
       }
     } catch (error: any) {
-      console.error('Error fetching users:', error);
+      devError('Error fetching users:', error);
       toast.error('Failed to load users');
     } finally {
       setLoading(false);

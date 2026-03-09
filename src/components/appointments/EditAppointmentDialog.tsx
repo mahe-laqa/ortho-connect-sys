@@ -76,7 +76,7 @@ export function EditAppointmentDialog({ appointment, open, onOpenChange, onSucce
           appointment_date: data.appointmentDate,
           appointment_time: data.appointmentTime,
           duration_minutes: data.duration ? parseInt(data.duration) : 30,
-          status: data.status,
+          status: data.status as "scheduled" | "confirmed" | "completed" | "cancelled" | "no_show",
           reason: data.reason || null,
           notes: data.notes || null,
         })

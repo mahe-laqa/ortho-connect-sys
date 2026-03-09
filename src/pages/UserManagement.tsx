@@ -110,15 +110,17 @@ export default function UserManagement() {
     try {
       setUpdating(userId);
       
-      // Update or insert role
+      // Delete all existing roles for this user first, then insert the new one
+      const { error: deleteError } = await supabase
+        .from('user_roles')
+        .delete()
+        .eq('user_id', userId);
+
+      if (deleteError) throw deleteError;
+
       const { error } = await supabase
         .from('user_roles')
-        .upsert({ 
-          user_id: userId, 
-          role: newRole 
-        }, {
-          onConflict: 'user_id,role'
-        });
+        .insert({ user_id: userId, role: newRole });
 
       if (error) throw error;
 

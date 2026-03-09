@@ -34,10 +34,14 @@ const App = () => (
                 <Route index element={<Dashboard />} />
                 <Route path="patients" element={<Patients />} />
                 <Route path="appointments" element={<Appointments />} />
-                <Route path="users" element={<UserManagement />} />
                 <Route path="doctors" element={<Doctors />} />
                 <Route path="treatments" element={<Treatments />} />
                 <Route path="reports" element={<Reports />} />
+              </Route>
+            </Route>
+            <Route element={<ProtectedRoute requiredRole="admin" />}>
+              <Route path="/dashboard" element={<DashboardLayout />}>
+                <Route path="users" element={<UserManagement />} />
               </Route>
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

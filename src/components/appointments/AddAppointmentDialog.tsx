@@ -75,7 +75,7 @@ export function AddAppointmentDialog({ open, onOpenChange, onSuccess }: AddAppoi
       if (error) throw error;
       setDoctors(data || []);
     } catch (error: any) {
-      console.error('Error fetching doctors:', error);
+      devError('Error fetching doctors:', error);
       toast.error('Failed to load doctors');
     }
   };

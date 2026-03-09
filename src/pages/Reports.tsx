@@ -86,7 +86,7 @@ export default function Reports() {
       });
     } catch (error: any) {
       toast.error('Failed to fetch statistics');
-      console.error('Error:', error);
+      devError('Error:', error);
     } finally {
       setLoading(false);
     }

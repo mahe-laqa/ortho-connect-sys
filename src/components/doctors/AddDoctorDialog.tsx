@@ -65,7 +65,7 @@ export function AddDoctorDialog({ open, onOpenChange, onSuccess }: AddDoctorDial
 
       setUsers(availableUsers);
     } catch (error: any) {
-      console.error('Error fetching users:', error);
+      devError('Error fetching users:', error);
       toast.error('Failed to load users');
     }
   };

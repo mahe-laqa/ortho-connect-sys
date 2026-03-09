@@ -58,7 +58,7 @@ export default function Appointments() {
       fetchAppointments();
     } catch (error: any) {
       toast.error('Failed to delete appointment');
-      console.error('Error:', error);
+      devError('Error:', error);
     }
   };
 

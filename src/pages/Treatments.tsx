@@ -77,7 +77,7 @@ export default function Treatments() {
       setTreatments(mockTreatments);
     } catch (error: any) {
       toast.error('Failed to fetch treatments');
-      console.error('Error:', error);
+      devError('Error:', error);
     } finally {
       setLoading(false);
     }

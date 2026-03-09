@@ -36,7 +36,7 @@ export default function Patients() {
       setFilteredPatients(data || []);
     } catch (error: any) {
       toast.error('Failed to fetch patients');
-      console.error('Error:', error);
+      devError('Error:', error);
     } finally {
       setLoading(false);
     }

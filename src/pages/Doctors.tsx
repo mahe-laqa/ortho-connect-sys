@@ -85,7 +85,7 @@ export default function Doctors() {
       fetchDoctors();
     } catch (error: any) {
       toast.error('Failed to delete doctor');
-      console.error('Error:', error);
+      devError('Error:', error);
     }
   };
 

@@ -50,7 +50,7 @@ export default function Dashboard() {
         activeAppointments: activeCount || 0,
       });
     } catch (error) {
-      console.error('Error fetching stats:', error);
+      devError('Error fetching stats:', error);
     }
   };
 

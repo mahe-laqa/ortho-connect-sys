@@ -125,7 +125,7 @@ export default function UserManagement() {
       toast.success('User role updated successfully');
       fetchUsers();
     } catch (error: any) {
-      console.error('Error updating role:', error);
+      devError('Error updating role:', error);
       toast.error('Failed to update user role');
     } finally {
       setUpdating(null);
